@@ -18,7 +18,7 @@ const Label = styled.label`
 const OutlinedInput = styled.div`
   border-radius: 8px;
   border: 0.5px solid ${({ theme }) => theme.text_secondary + 70};
-  background-color: transparent;
+  background-color: inherit;
   color: ${({ theme }) => theme.text_secondary};
   outline: none;
   padding: 14px;

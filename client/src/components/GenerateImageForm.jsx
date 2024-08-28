@@ -47,7 +47,27 @@ const Actions = styled.div`
 `;
 
 
-const GenerateImageForm = () => {
+const GenerateImageForm = ({
+  createPostLoading,
+  setcreatePostLoading,
+  generateImageLoading,
+  setGenerateImageLoading,
+  post,
+  setPost,
+}) => {
+
+  const generateImageFunction = ()=>{
+
+    setGenerateImageLoading(true)
+  }
+
+  const createPostFuction = ()=>{
+
+    setcreatePostLoading(true)
+  }
+
+
+
   return (
     <Form>
         <Top>
@@ -63,6 +83,8 @@ const GenerateImageForm = () => {
             label="Author"
             placeholder="Enter your name"
             name="name"
+            value={post.author}
+            handelChange={(e)=> setPost({...post, author: e.target.value})}
             
             />
             <TextInput
@@ -71,24 +93,33 @@ const GenerateImageForm = () => {
             name="prompt"
             textArea
             rows="8"
+            value={post.prompt}
+            handelChange={(e)=> setPost({...post, prompt: e.target.value})}
             />
 
             * You can post the AI Generated Image to showcase in the community!
         </Body>
         <Actions>
-            Actions
+          <Button  
+              text="Generate Image"
+              leftIcon={<AutoAwesome />}
+              flex
+              isLoading={generateImageLoading}
+              isDisabled={post.author==="" || post.prompt ===  ""}
+              onClick={()=>generateImageFunction()}
+          />
+          <Button  
+              text="Post Image"
+              leftIcon={<CreateRounded />}
+              flex
+              type="secondary"
+              isLoading={createPostLoading}
+              isDisabled={post.name==="" || post.photo ==="" || post.prompt ===  ""}
+              onClick={()=>createPostFuction()}
+          />
+            
         </Actions>
-        <Button  
-            text="Generate Image"
-            leftIcon={<AutoAwesome />}
-            flex
-        />
-        <Button  
-            text="Post Image"
-            leftIcon={<CreateRounded />}
-            flex
-            type="secondary"
-        />
+        
     </Form>
   )
 }
